@@ -1,21 +1,10 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-///A night vision device (NVD) is an optoelectronic device that allows 
-///images to be produced in levels of light approaching total darkness. 
-///The image may be a conversion to visible light of both visible light and near-infrared, 
-///while by convention detection of thermal infrared is denoted thermal imaging. 
-///The image produced is typically monochrome, e.g. shades of green. 
-///NVDs are most often used by the military and law enforcement agencies, 
-///Many NVDs also include optical components such as a sacrificial lens,[1] or telescopic lenses or mirrors. 
-///An NVD may have an IR illuminator, making it an active as opposed to passive night vision device.
-///
-
-Shader "Custom/DeferredNightVisionShader" {
+﻿Shader "Custom/DeferredNightVisionShader" {
 
 	Properties {
 		_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-		_NVColor ("NV Color", Color) = (0,1,0.1724138,0)
+		_NVColor ("NV Color", Color) = (1,1,1,0)
 		_LightSensitivityMultiplier ("SensitivityMultiplier", Range(0,128)) = 90
+		_FOV ("FOV", Range(0,5)) = 0
 	}
 	
 SubShader {
@@ -47,6 +36,7 @@ SubShader {
 			float4 _MainTex_ST;
 			float4 _NVColor;
 			float4 _TargetWhiteColor;
+			float _FOV;
 			float _BaseLightingContribution;
 			float _LightSensitivityMultiplier;
 
@@ -69,7 +59,7 @@ SubShader {
 				float lumc = Luminance (col.rgb);
 				
 				//Desat + green the image
-				col = dot(col, _NVColor);	
+				col = dot(col, float4(1,1,1,0));	
 				
 				//Make bright areas/lights too bright
 				col.rgb = lerp(col.rgb, _TargetWhiteColor, lumc * _LightSensitivityMultiplier);
@@ -79,12 +69,9 @@ SubShader {
 				
 				#if USE_VIGNETTE
 				//Add vignette
-				float dist = distance(i.texcoord, float2(0.5,0.5));
-				col *= smoothstep(0.5,0.45,dist);
-				#endif				
-				
-				//Increase the brightness of all normal areas by a certain amount
-				col.rb = max (col.r - 0.75, 0)*4;
+				float dist = distance(i.texcoord, float2(0.475,0.32));
+				col *= smoothstep(0.5,0.45,dist * _FOV);
+				#endif
 				
 				return col;
 			}
