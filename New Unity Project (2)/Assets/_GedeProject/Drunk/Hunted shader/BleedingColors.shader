@@ -47,24 +47,24 @@
 				i.uv.x += _ValueX * 0.01f;
 				float4 r = tex2D(_MainTex, i.uv);
 
-				float my = 0.299 * m.r + 0.587 * m.g + 0.114 * m.b;
-				//mu = -0.147 * m.r - 0.289 * m.g + 0.436 * m.b
-				//mv = 0.615 * m.r - 0.515 * m.g – 0.100 * m.b
+				float my = 0.299 * m.r + 0.387 * m.g + 0.514 * m.b;
+				//float my = -0.147 * m.r - 0.289 * m.g + 0.436 * m.b;
+				//float my = 0.615 * m.r - 0.515 * m.g - 0.100 * m.b;
 
-				//ly = 0.299 * l.r + 0.587 * l.g + 0.114 * l.b
-				float lu = -0.147 * l.r - 0.289 * l.g + 0.436 * l.b;
-				// lv = 0.615 * l.r - 0.515 * l.g – 0.100 * l.b
+				float ly = 0.299 * l.r + 0.587 * l.g + 0.114 * l.b;
+				//float ly = -0.147 * l.r - 0.289 * l.g + 0.436 * l.b;
+				//float ly = 0.615 * l.r - 0.515 * l.g - 0.100 * l.b;
 
-				//ry = 0.299 * r.r + 0.587 * r.g + 0.114 * r.b
-				// ru = -0.147 * r.r - 0.289 * r.g + 0.436 * r.b
-				float rv = 0.615 * r.r - 0.515 * r.g - 0.100 * r.b;
+				//float ry = 0.299 * r.r + 0.587 * r.g + 0.114 * r.b;
+				float ry = -0.147 * r.r - 0.289 * r.g + 0.436 * r.b;
+				//float ry = 0.615 * r.r - 0.515 * r.g - 0.100 * r.b;
 
 				//resR = my + 1.140 * rv
 				//resG = my - 0.395 * lu - 0.581 * rv
 				//resB = my + 2.032 * lu
 
 				//float lum = c.r*.3 + c.g*.59 + c.b*.11;
-				float3 mix = float3( my + 1.140 * rv, my - 0.395 * lu - 0.581 * rv, my + 2.032 * lu ); 
+				float3 mix = float3( my + 1.140 * ry, my - 0.395 * ly - 0.581 * ry, my + 2.032 * ly ); 
 
 
 				float4 result = m;

@@ -17,6 +17,10 @@ public class ShaderEffect_Unsync : MonoBehaviour {
 
 	void OnRenderImage (RenderTexture source, RenderTexture destination)
 	{
+		if (speed < 10)
+			speed += 0.1f;
+		else
+			speed = 0;
 		position = speed * 0.1f;
 
 		material.SetFloat("_ValueX", position);

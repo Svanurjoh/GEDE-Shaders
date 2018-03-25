@@ -22,7 +22,7 @@ public class ShaderEffect_Tint : MonoBehaviour {
 
 		material.SetFloat("_ValueX", y);
 		material.SetFloat("_ValueY", u);
-		material.SetFloat("_ValueZ", v);
+		material.SetFloat("_ValueZ", Random.Range(-15, 15));
 
 		Graphics.Blit (source, destination, material);
 	}

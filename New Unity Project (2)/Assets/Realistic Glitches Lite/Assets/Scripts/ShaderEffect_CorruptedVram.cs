@@ -16,7 +16,7 @@ public class ShaderEffect_CorruptedVram : MonoBehaviour {
 		
 	void OnRenderImage (RenderTexture source, RenderTexture destination)
 	{
-		material.SetFloat("_ValueX", shift);
+		material.SetFloat("_ValueX", -1f);
 		material.SetTexture("_Texture", texture);
 		Graphics.Blit (source, destination, material);
 	}
