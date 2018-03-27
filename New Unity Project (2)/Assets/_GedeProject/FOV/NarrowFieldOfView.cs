@@ -17,7 +17,7 @@ public class NarrowFieldOfView : MonoBehaviour {
 	[Range(0f, 128f)]
 	private float m_LightSensitivityMultiplier = 0;
 
-	private float m_FOV = 0;
+	public float m_FOV = 0;
 
 	Material m_Material;
 	Shader m_Shader;
@@ -68,8 +68,8 @@ public class NarrowFieldOfView : MonoBehaviour {
 	[ContextMenu("UpdateShaderValues")]
 	public void UpdateShaderValues()
 	{
-		if(m_FOV < 5)
-			m_FOV += 0.001f;
+		//if(m_FOV < 5)
+			//m_FOV += 0.001f;
 		if (m_Material == null)
 			return;
 

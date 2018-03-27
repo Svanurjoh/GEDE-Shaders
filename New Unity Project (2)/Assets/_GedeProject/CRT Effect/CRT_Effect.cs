@@ -17,7 +17,7 @@ public class CRT_Effect : MonoBehaviour {
 	[Range(1f, 5f)] public float lineWidth = 1f;
 	[Range(1f, 5f)] public float lineSpeed = 1f;
 
-	[Range(0.01f, 0.05f)] public float yExtra = 0f;
+	private float yExtra = 0f;
 	/*[Header("Fly Effect")]
 	public Texture2D flySilhouette;
 	[Range(0f, 100f)] public float flySize = 10f;
@@ -26,6 +26,8 @@ public class CRT_Effect : MonoBehaviour {
 	[Range(2f, 6f)] public float duration = 3f;
 	[Range(0f, 360f)] 
 	public float rotation;*/
+	[Range(0f, 0.1f)]
+	public float glitch = 0.05f;
 
 	void Start()
 	{
@@ -57,7 +59,7 @@ public class CRT_Effect : MonoBehaviour {
 	void OnRenderImage (RenderTexture source, RenderTexture destination)
 	{
 		if (m_Enable) {
-			yExtra = Random.Range (0.01f, 0.05f); 
+			yExtra = Random.Range (glitch - 0.03f, glitch); 
 			Graphics.Blit (source, source, mat);
 			mat2.SetFloat("_ValueY", yExtra);
 			Graphics.Blit (source, source, mat2);
