@@ -64,6 +64,24 @@ public class ShaderController : MonoBehaviour {
 			crt.lineSpeed = Mathf.Clamp (crt.lineSpeed, 1f, 5f);
 		}
 
+		if (haunt.enabled) {
+			if (Input.GetKey (KeyCode.Keypad7))
+				haunt.hauntedCooldown -= 1f * Time.deltaTime;
+
+			if (Input.GetKey (KeyCode.Keypad9))
+				haunt.hauntedCooldown += 1f * Time.deltaTime;
+
+			if (Input.GetKey (KeyCode.Keypad4))
+				haunt.hauntedTime -= 1f * Time.deltaTime;
+
+			if (Input.GetKey (KeyCode.Keypad6))
+				haunt.hauntedTime += 1f * Time.deltaTime;
+
+
+			haunt.hauntedCooldown = Mathf.Clamp (haunt.hauntedCooldown, 1f, 8f);
+			haunt.hauntedTime = Mathf.Clamp (haunt.hauntedTime, 1f, 6f);
+		}
+
 		if (nfv.enabled) {
 			if (Input.GetKey (KeyCode.Keypad7))
 				nfv.m_FOV -= 0.5f * Time.deltaTime;

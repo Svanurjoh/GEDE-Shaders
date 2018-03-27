@@ -4,12 +4,14 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class TestShader : MonoBehaviour {
-	public float distance = 1;
-	public float intensity = -44f;
+	private float distance = 1;
+	private float intensity = -44f;
 	private Material material;
 
-	private float hauntedCooldown = 4.0f;
-	private float hauntedTime = 1.0f;
+	[Range(1f, 8f)]
+	public float hauntedCooldown = 4.0f;
+	[Range(1f, 6f)]
+	public float hauntedTime = 1.0f;
 	private float lastHaunt = 0f;
 	private int frame = 0;
 	private bool haunt = false;
@@ -38,7 +40,7 @@ public class TestShader : MonoBehaviour {
 			haunt = false;
 			distance = 0.0f;
 		}
-		if (lastHaunt >= hauntedCooldown) {
+		if (lastHaunt >= hauntedTime + hauntedCooldown) {
 			hauntOnCd = false;
 		}
 		lastHaunt += Time.deltaTime;
